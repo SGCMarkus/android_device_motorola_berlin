@@ -129,3 +129,11 @@ TARGET_USES_QTI_MAPPER_EXTENSIONS_1_1 := true
 
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
+
+# HIDL
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+    $(DEVICE_PATH)/device_framework_matrix.xml \
+    vendor/lineage/config/device_framework_matrix.xml
+DEVICE_MANIFEST_SKUS := yupik
+DEVICE_MANIFEST_YUPIK_FILES := manifest_yupik.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
