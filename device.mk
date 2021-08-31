@@ -397,6 +397,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
+# Shipping level
 PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Inherit from vendor blobs
