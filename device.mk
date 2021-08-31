@@ -376,6 +376,12 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.perf@2.1.vendor \
     vendor.qti.hardware.perf@2.2.vendor
 
+# QTI service tracker
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.servicetracker@1.0.vendor \
+    vendor.qti.hardware.servicetracker@1.1.vendor \
+    vendor.qti.hardware.servicetracker@1.2.vendor
+
 PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Inherit from vendor blobs
