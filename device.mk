@@ -433,5 +433,9 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.2-service-qti
 
+# Vendor service manager
+PRODUCT_PACKAGES += \
+    vndservicemanager
+
 # Inherit from vendor blobs
 $(call inherit-product, vendor/motorola/berlin/berlin-vendor.mk)
