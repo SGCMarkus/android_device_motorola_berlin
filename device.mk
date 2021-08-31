@@ -393,6 +393,10 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-service.multihal \
     libsensorndkbridge
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
+
 PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Inherit from vendor blobs
