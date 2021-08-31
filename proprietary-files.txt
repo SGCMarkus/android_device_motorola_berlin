@@ -826,8 +826,8 @@ vendor/lib64/unnhal-acc-htp.so
 -system_ext/app/NfcSetup_st/NfcSetup_st.apk
 system_ext/framework/com.st.android.nfc_extensions.jar
 system_ext/permissions/com.st.android.nfc_extensions.xml
-vendor/bin/hw/vendor.nxp.hardware.nfc@2.0-service.st
-vendor/etc/init/vendor.nxp.hardware.nfc@2.0-service.st.rc
+vendor/bin/hw/android.hardware.nfc@1.2-service.st
+vendor/etc/init/android.hardware.nfc@1.2-service.st.rc
 vendor/etc/init/hw/init.vendor.st21nfc.rc
 vendor/lib/nfc_nci.st21nfc.st.so
 vendor/lib64/nfc_nci.st21nfc.st.so
