@@ -388,6 +388,11 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@2.0-service.multihal \
+    libsensorndkbridge
+
 PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Inherit from vendor blobs
