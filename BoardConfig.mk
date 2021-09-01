@@ -20,6 +20,8 @@ DEVICE_PATH := device/motorola/berlin
 
 -include vendor/motorola/berlin/BoardConfigVendor.mk
 
+BUILD_BROKEN_DUP_RULES := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -60,12 +62,55 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc LLVM=1
 TARGET_KERNEL_SOURCE := kernel/motorola/sm7325
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG :=
+TARGET_KERNEL_CONFIG := gki_defconfig
+TARGET_NO_KERNEL := false
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+
+# Prebuilt kernel
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/
 
 # Kernel modules
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.ramdisk))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
+KERNEL_MODULE_DIR := $(DEVICE_PATH)/prebuilt/modules
+KERNEL_MODULES := $(wildcard $(KERNEL_MODULE_DIR)/*.ko)
+BOARD_KERNEL_MODULE_DIRS += $(DEVICE_PATH)/prebuilt/modules
+
+BOOT_KERNEL_MODULES := $(strip $(shell cat $(DEVICE_PATH)/modules.load.ramdisk))
+KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
+RECOVERY_KERNEL_MODULES := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
+
+BOOT_KERNEL_MODULES_FILTER := $(foreach m,$(BOOT_KERNEL_MODULES),%/$(m))
+RECOVERY_KERNEL_MODULES_FILTER := $(foreach m,$(RECOVERY_KERNEL_MODULES),%/$(m))
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES += \
+    $(filter $(BOOT_KERNEL_MODULES_FILTER) \
+    $(RECOVERY_KERNEL_MODULES_FILTER),$(KERNEL_MODULES))
+
+BOARD_VENDOR_KERNEL_MODULES := $(KERNEL_MODULES)
+
+BOARD_VENDOR_KERNEL_MODULES_LOAD := \
+    $(filter-out $(BOOT_KERNEL_MODULES_FILTER), \
+    $(filter $(RECOVERY_KERNEL_MODULES_FILTER),$(KERNEL_MODULES_LOAD)))
+BOARD_VENDOR_KERNEL_MODULES_LOAD += \
+    $(filter-out $(BOOT_KERNEL_MODULES_FILTER) \
+        $(RECOVERY_KERNEL_MODULES_FILTER),$(KERNEL_MODULES_LOAD))
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := \
+    $(filter $(BOOT_KERNEL_MODULES_FILTER),$(KERNEL_MODULES_LOAD))
+
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := \
+    $(filter $(BOOT_KERNEL_MODULES_FILTER),$(KERNEL_MODULES_LOAD))
+
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD += \
+    $(filter-out $(BOOT_KERNEL_MODULES_FILTER), \
+    $(filter $(RECOVERY_KERNEL_MODULES_FILTER),$(KERNEL_MODULES_LOAD)))
+
+#BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
+#BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.ramdisk))
+#BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
+BOARD_BUILD_VENDOR_RAMDISK_IMAGE := true
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
@@ -130,12 +175,17 @@ TARGET_USES_QTI_MAPPER_EXTENSIONS_1_1 := true
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
 
+# Filesystem
+TARGET_FS_CONFIG_GEN := \
+    $(DEVICE_PATH)/config.fs \
+    $(DEVICE_PATH)/mot_aids.fs
+
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(DEVICE_PATH)/device_framework_matrix.xml \
     vendor/lineage/config/device_framework_matrix.xml
 DEVICE_MANIFEST_SKUS := yupik
-DEVICE_MANIFEST_YUPIK_FILES := manifest_yupik.xml
+DEVICE_MANIFEST_YUPIK_FILES := $(DEVICE_PATH)/manifest_yupik.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Metadata
