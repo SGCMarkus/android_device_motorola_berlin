@@ -49,7 +49,12 @@ $(DSP_MOUNT_POINT): $(LOCAL_INSTALLED_MODULE)
 	@echo "Creating $(DSP_MOUNT_POINT)"
 	@mkdir -p $(TARGET_OUT_VENDOR)/dsp
 
-ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT) $(BT_FIRMWARE_MOUNT_POINT) $(DSP_MOUNT_POINT)
+FSG_MOUNT_POINT := $(TARGET_OUT_VENDOR)/fsg
+$(FSG_MOUNT_POINT): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating $(FSG_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/fsg
+
+ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT) $(BT_FIRMWARE_MOUNT_POINT) $(DSP_MOUNT_POINT) $(FSG_MOUNT_POINT)
 
 RFS_MSM_ADSP_SYMLINKS := $(TARGET_OUT_VENDOR)/rfs/msm/adsp/
 $(RFS_MSM_ADSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -102,7 +107,9 @@ $(RFS_MSM_SLPI_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 WIFI_FIRMWARE_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld
 $(WIFI_FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "Creating wifi firmware symlinks: $@"
-	@mkdir -p $@
+	@mkdir -p $@/wlan
+	@mkdir -p $@/qca6390
+	@mkdir -p $@/qca6750
 	$(hide) ln -sf /vendor/etc/wifi/WCNSS_qcom_cfg.ini $@/WCNSS_qcom_cfg.ini
 	$(hide) ln -sf /mnt/vendor/persist/wlan/wlan_mac.bin $@/wlan/wlan_mac.bin
 	$(hide) ln -sf /vendor/etc/wifi/wlan/WCNSS_qcom_cfg.ini $@/wlan/WCNSS_qcom_cfg.ini
@@ -115,5 +122,29 @@ $(WIFI_FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /vendor/etc/wifi/qca6750/wlan_mac.bin $@/qca6750/WCNSS_mot_cfg.ini
 
 ALL_DEFAULT_INSTALLED_MODULES += $(RFS_MSM_ADSP_SYMLINKS) $(RFS_MSM_CDSP_SYMLINKS) $(RFS_MSM_MPSS_SYMLINKS) $(RFS_MSM_SLPI_SYMLINKS) $(WIFI_FIRMWARE_SYMLINKS)
+
+#VENDOR_KERNEL_MODULE_FOLDERS := $(TARGET_OUT_VENDOR)/lib/modules/5.4-gki
+#$(VENDOR_KERNEL_MODULE_FOLDERS): $(LOCAL_INSTALLED_MODULE)
+#	@echo "Creating folder: $@"
+#	@mkdir -p $@
+
+#VENDOR_RAMDISK_KERNEL_MODULE_FOLDERS := $(TARGET_VENDOR_RAMDISK_OUT)/lib/modules/5.4-gki
+#$(VENDOR_RAMDISK_KERNEL_MODULE_FOLDERS): $(LOCAL_INSTALLED_MODULE)
+#	@echo "Creating folder: $@"
+#	@mkdir -p $@
+
+#ALL_DEFAULT_INSTALLED_MODULES += $(VENDOR_KERNEL_MODULE_FOLDERS) $(VENDOR_RAMDISK_KERNEL_MODULE_FOLDERS)
+
+#VENDOR_RAMDISK_KERNEL_FILES := $(addprefix $(TARGET_VENDOR_RAMDISK_OUT)/lib/modules/,$(shell ls device/motorola/berlin/prebuilt/modules/vendor-ramdisk))
+
+#INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
+#INTERNAL_VENDOR_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor-boot)/vendor-ramdisk.cpio.gz
+#$(VENDOR_RAMDISK_KERNEL_MODULES): $(INSTALLED_KERNEL_TARGET)
+#	@echo "Copying kernel modules to vendor ramdisk: $@"
+#	@mkdir -p $(dir $@)
+#	cp -r device/motorola/berlin/prebuilt/modules/vendor-ramdisk/* $(TARGET_VENDOR_RAMDISK_OUT)/lib/modules/
+#	cp -r device/motorola/berlin/prebuilt/modules/vendor/* $(TARGET_OUT_VENDOR)/lib/modules/
+
+#$(INTERNAL_VENDOR_RAMDISK_TARGET): $(VENDOR_RAMDISK_KERNEL_MODULES)
 
 endif

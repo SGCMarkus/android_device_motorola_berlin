@@ -37,6 +37,11 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
+# AAPT
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := 400dpi
+PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
+
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -122,9 +127,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/sku_yupik/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_yupik/mixer_paths.xml \
     $(LOCAL_PATH)/audio/sku_yupik/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_yupik/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sku_yupik/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_yupik/sound_trigger_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_effects.xml \
-    $(LOCAL_PATH)/audio/audio_ext_spkr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_ext_spkr.conf \
-    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/audio/audio_ext_spkr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_ext_spkr.conf \
+    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
@@ -136,6 +141,7 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.bluetooth_audio@2.0.vendor \
+    vendor.qti.hardware.bluetooth_audio@2.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
@@ -223,7 +229,13 @@ PRODUCT_PACKAGES += \
 
 # HIDL
 PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.base@1.0_system \
+    android.hidl.manager@1.0 \
+    android.hidl.manager@1.0_system \
+    libhidltransport \
     libhidltransport.vendor \
+    libhwbinder \
     libhwbinder.vendor
 
 # HotwordEnrollement app permissions
@@ -232,6 +244,7 @@ PRODUCT_COPY_FILES += \
 
 # Init
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.qcom \
     $(LOCAL_PATH)/rootdir/etc/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 
 $(foreach f,$(wildcard $(LOCAL_PATH)/rootdir/etc/init/hw/*.rc),\
@@ -252,11 +265,31 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom \
 
-$(foreach f,$(wildcard $(cat $(LOCAL_PATH)/modules.load.ramdisk)),\
-        $(eval PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/modules/$(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/$(notdir $f)))
+#$(foreach f,$(wildcard $(cat $(LOCAL_PATH)/modules.load.ramdisk)),\
+#        $(eval PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/modules/$(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/$(notdir $f)))
 
-$(foreach f,$(wildcard $(cat $(LOCAL_PATH)/modules.load)),\
-        $(eval PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/modules/$(f):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $f)))
+#$(foreach f,$(wildcard $(cat $(LOCAL_PATH)/modules.load)),\
+#        $(eval PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/modules/$(f):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $f)))
+
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor/*.ko),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $f)))
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor/modules.*),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $f)))
+
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor/5.4-gki/*.ko),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR)/lib/modules/5.4-gki/$(notdir $f)))
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor/5.4-gki/modules.*),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR)/lib/modules/5.4-gki/$(notdir $f)))
+
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor-ramdisk/*.ko),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/$(notdir $f)))
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor-ramdisk/modules.*),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/$(notdir $f)))
+
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor-ramdisk/5.4-gki/*.ko),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/5.4-gki/$(notdir $f)))
+$(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor-ramdisk/5.4-gki/modules.*),\
+        $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/5.4-gki/$(notdir $f)))
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -407,6 +440,14 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.perf@2.0.vendor \
     vendor.qti.hardware.perf@2.1.vendor \
     vendor.qti.hardware.perf@2.2.vendor
+
+# QMI
+PRODUCT_PACKAGES += \
+    libjson \
+    libqti_vndfwk_detect \
+    libqti_vndfwk_detect.vendor \
+    libvndfwk_detect_jni.qti \
+    libvndfwk_detect_jni.qti.vendor
 
 # QTI service tracker
 PRODUCT_PACKAGES += \
