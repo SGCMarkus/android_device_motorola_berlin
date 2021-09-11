@@ -305,10 +305,12 @@
     <bool name="config_device_volte_available">true</bool>
 
     <!-- Flag specifying whether VT is available on device -->
-    <bool name="config_device_vt_available">true</bool>
+    <bool name="config_device_vt_available">false</bool>
 
     <!-- Flag specifying whether WFC over IMS is available on device -->
-    <bool name="config_device_wfc_ims_available">true</bool>
+    <bool name="config_device_wfc_ims_available">false</bool>
+	
+    <bool name="config_enable_secondary_sim_5g_sa">false</bool>
 
     <!-- IWLAN data service package name to bind to by default. If none is specified in an overlay, an
          empty string is passed in -->
@@ -360,6 +362,13 @@
     <integer-array name="config_keyboardTapVibePattern">
         <item>0</item>
         <item>30</item>
+    </integer-array>
+
+    <integer-array name="config_scrollBarrierVibePattern">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>15</item>
     </integer-array>
 
     <!-- Default list of files pinned by the Pinner Service -->
@@ -432,4 +441,40 @@
         <item>1</item>
         <item>2</item>
     </integer-array>
+
+    <string-array name="config_oemUsbModeOverride">
+        <item>bp-tools:mtp:diag,serial,rmnet:mtp</item>
+        <item>bp-tools:mtp,adb:diag,serial,rmnet,adb:mtp,adb</item>
+        <item>bp-tools:adb:diag,serial,rmnet,adb:adb</item>
+        <item>bp-tools:ptp:diag,serial,rmnet:ptp</item>
+        <item>bp-tools:ptp,adb:diag,serial,rmnet,adb:ptp,adb</item>
+        <item>bp-tools:rndis:rndis,diag,serial:mtp</item>
+        <item>bp-tools:rndis,adb:rndis,diag,serial,adb:mtp,adb</item>
+        <item>qcom:adb:diag,serial_cdev,rmnet,dpl,qdss,adb:adb</item>
+        <item>qcom:mtp:diag,serial_cdev,rmnet,dpl,qdss:mtp</item>
+        <item>qcom:mtp,adb:diag,serial_cdev,rmnet,dpl,qdss,adb:mtp,adb</item>
+        <item>qcom:ptp:diag,serial_cdev,rmnet,dpl,qdss:ptp</item>
+        <item>qcom:ptp,adb:diag,serial_cdev,rmnet,dpl,qdss,adb:ptp,adb</item>
+        <item>qcom:rndis:diag,serial_cdev,rmnet,dpl,qdss:mtp</item>
+        <item>qcom:rndis,adb:diag,serial_cdev,rmnet,dpl,qdss,adb:mtp,adb</item>
+        <item>mot-factory:mtp:diag,usbnet:mtp</item>
+        <item>mot-factory:mtp,adb:diag,usbnet,adb:mtp,adb</item>
+        <item>mot-factory:adb:diag,usbnet,adb:adb</item>
+        <item>mot-factory:ptp:diag,usbnet:ptp</item>
+        <item>mot-factory:ptp,adb:diag,usbnet,adb:ptp,adb</item>
+    </string-array>
+
+    <bool name="config_smart_battery_available">true</bool>
+
+    <!-- Use ERI text for network name on CDMA LTE -->
+    <bool name="config_LTE_eri_for_network_name">true</bool>
+
+    <bool name="config_auto_attach_data_on_creation">false</bool>
+
+    <!-- Configure mobile network MTU. The standard default is set here but each carrier
+         may have a specific value set in an overlay config.xml file. -->
+    <!--<integer name="config_mobile_mtu">1410</integer>-->
+
+    <!--  Maximum number of supported users -->
+    <integer name="config_multiuserMaximumUsers">4</integer>
 </resources>

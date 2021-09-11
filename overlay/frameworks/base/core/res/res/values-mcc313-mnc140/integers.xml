@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="config_vt_av_cam_sensor_delay">20</integer>
+    <integer name="config_vt_av_display_delay">40</integer>
+    <integer name="config_vt_av_dropset_feature">0</integer>
+    <integer name="config_vt_av_playout_delay">10</integer>
+</resources>
