@@ -291,6 +291,11 @@ $(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor-ramdisk/5.4-gki/*.k
 $(foreach f,$(wildcard $(LOCAL_PATH)/prebuilt/modules/vendor-ramdisk/5.4-gki/modules.*),\
         $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules/5.4-gki/$(notdir $f)))
 
+# Keylayout
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/uinput_nav.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/uinput_nav.idc \
+    $(LOCAL_PATH)/keylayout/uinput_nav.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput_nav.kl
+
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/media_codecs_lahaina.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
