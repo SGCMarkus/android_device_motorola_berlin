@@ -177,6 +177,41 @@
         </interface>
         <fqname>@1.0::IAnt/default</fqname>
     </hal>
+	<hal format="hidl">
+        <name>com.motorola.hardware.biometric.fingerprint</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IMotoFingerPrint</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IMotoFingerPrintSensorTest</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IMotoFingerPrint/default</fqname>
+        <fqname>@1.0::IMotoFingerPrintSensorTest/default</fqname>
+    </hal>
+	<hal format="hidl" override="true">
+        <name>com.motorola.hardware.display.panel</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IDisplayPanel</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.1::IDisplayPanel/default</fqname>
+    </hal>
+	<hal format="hidl" override="true">
+        <name>com.motorola.hardware.display.touch</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IMotTouch</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.1::IMotTouch/default</fqname>
+    </hal>
     <hal format="hidl">
         <name>com.qualcomm.qti.dpm.api</name>
         <transport>hwbinder</transport>
@@ -474,14 +509,14 @@
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.ims</name>
         <transport>hwbinder</transport>
-        <version>1.6</version>
+        <version>1.7</version>
         <interface>
             <name>IImsRadio</name>
             <instance>imsradio0</instance>
             <instance>imsradio1</instance>
         </interface>
-        <fqname>@1.6::IImsRadio/imsradio0</fqname>
-        <fqname>@1.6::IImsRadio/imsradio1</fqname>
+        <fqname>@1.7::IImsRadio/imsradio0</fqname>
+        <fqname>@1.7::IImsRadio/imsradio1</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.internal.deviceinfo</name>
