@@ -524,6 +524,7 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     libwifi-hal-ctrl \
     libwifi-hal-qcom \
+	TetheringConfigOverlay.berlin \
     vendor.qti.hardware.wifi.hostapd@1.0.vendor \
     vendor.qti.hardware.wifi.hostapd@1.1.vendor \
     vendor.qti.hardware.wifi.hostapd@1.2.vendor \

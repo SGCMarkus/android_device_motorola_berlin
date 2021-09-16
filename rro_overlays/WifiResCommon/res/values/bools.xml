@@ -2,6 +2,7 @@
 <resources>
     <!-- Integer indicating maximum hardware supported client number of soft ap -->
     <bool name="config_vendorWifi11axReadySupport">true</bool>
+    <bool name="config_wifiSoftapIeee80211axSupported">true</bool>
 
     <!-- boolean indicating whether or not to reset channel configuration during cloud configuration restore -->
     <bool name="config_vendor_wifi_softap_owe_supported">true</bool>
@@ -11,6 +12,7 @@
          since more bands may now be supported (such as 6GHz), the naming dual_band
          is no longer indicative, and a separate config now exists for each band -->
     <bool name="config_wifi5ghzSupport">true</bool>
+    <bool name="config_wifi6ghzSupport">true</bool>
 
     <!-- Wifi driver supports 6GHz band for softap -->
     <bool name="config_wifiSoftap6ghzSupported">true</bool>
@@ -41,4 +43,11 @@
 
     <!-- Wifi driver supports WPA3 Simultaneous Authentication of Equals (WPA3-SAE) for softap -->
     <bool name="config_wifi_softap_sae_supported">true</bool>
+
+    <bool name="config_wifiSoftapHeSuBeamformeeSupported">true</bool>
+    <bool name="config_wifiSoftapHeSuBeamformerSupported">true</bool>
+
+    <bool name="config_wifiFrameworkMaxNumSpatialStreamDeviceOverrideEnable">false</bool>
+    <bool name="config_wifiSoftapPassphraseAsciiEncodableCheck">false</bool>
+    <bool name="config_wifi_revert_country_code_on_cellular_loss">true</bool>
 </resources>
