@@ -34,8 +34,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
-# Setup dalvik vm configs
-$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)/bootctrl
 
 # AAPT
 PRODUCT_AAPT_CONFIG := normal
@@ -261,6 +261,10 @@ PRODUCT_PACKAGES += \
     libipanat \
     liboffloadhal
 
+# IPC router config
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
+
 # Kernel
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom \
@@ -350,8 +354,12 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1 \
     android.hardware.nfc@1.2 \
     android.hardware.nfc@1.2-service.st \
+    android.hardware.secure_element@1.0 \
+    android.hardware.secure_element@1.1 \
+	android.hardware.secure_element@1.2-service.st \
 	com.android.nfc_extras \
     NfcNci \
+	SecureElement \
     Tag \
 	nfc_nci.st21nfc.default
 
