@@ -111,16 +111,16 @@ vendor.audio.use.sw.mpegh.decoder=true
 vendor.audio.volume.headset.gain.depcal=true
 vendor.audio_hal.in_period_size=144
 vendor.audio_hal.period_multiplier=3
-vendor.audio_hal.period_size=240
+vendor.audio_hal.period_size=192
 vendor.voice.path.for.pcm.voip=true
 
 # Bluetooth
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac-lc3
 persist.bluetooth.a2dp_offload.disabled=false
 persist.sys.fflag.override.settings_bluetooth_hearing_aid=true
-persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac
 persist.vendor.bt.aac_frm_ctl.enabled=true
 persist.vendor.bt.aac_vbr_frm_ctl.enabled=true
+persist.vendor.btstack.aac_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.a2dp_mcast_test.enabled=false
 persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptiver2
 persist.vendor.qcom.bluetooth.aac_frm_ctl.enabled=true
@@ -151,9 +151,16 @@ vendor.display.disable_offline_rotator=1
 vendor.display.disable_scaler=0
 vendor.display.enable_async_powermode=1
 vendor.display.enable_early_wakeup=1
+vendor.display.enable_hdr10_gpu_target=1
 vendor.display.enable_optimize_refresh=1
 vendor.display.hwc_disable_hdr=0
 vendor.display.use_smooth_motion=1
+
+# DPM
+persist.vendor.dpm.feature=1
+persist.vendor.dpm.idletimer.mode=default
+persist.vendor.dpmhalservice.enable=1
+persist.vendor.eab.supported=1
 
 # DRM
 drm.service.enabled=true
@@ -189,6 +196,15 @@ ro.hardware.vulkan=adreno
 ro.opengles.version=196610
 vendor.gralloc.disable_ubwc=0
 
+# IMS
+persist.vendor.ims.cam_sensor_delay=20
+#persist.vendor.ims.disableDebugDataPathLogs=1
+#persist.vendor.ims.disableDebugLogs=1
+#persist.vendor.ims.disableIMSLogs=1
+persist.vendor.ims.display_delay=40
+persist.vendor.ims.playout_delay=50
+persist.vendor.ims.vt.enableadb=1
+
 # Incremental FS
 ro.incremental.enable=true
 
@@ -197,8 +213,16 @@ debug.stagefright.ccodec=4
 debug.stagefright.omx_default_rank=0
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
+# NFC
+ro.nfc.port=I2C
+ro.vendor.hw.nfc=st
+
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+
+# Qtee
+persist.vendor.qteeconnector.retrying_interval=30
+persist.vendor.qteeconnector.retrying_timeout=2000
 
 # Qualcomm System Daemon
 persist.vendor.qcomsysd.enabled=1
@@ -235,8 +259,10 @@ persist.vendor.radio.rat_on=combine
 persist.vendor.radio.sar_sensor=1
 persist.vendor.radio.sib16_support=1
 persist.vendor.radio.start_ota_daemon=0
+persist.vendor.radio.suppress_ussd_rel=1
 persist.vendor.radio.sw_mbn_update=0
 persist.vendor.rcs.presence.provision=0
+ro.vendor.hw.dualsim=true
 ro.vendor.radio.imei.sv=3
 
 # Sensors
@@ -249,6 +275,7 @@ ro.vendor.sensors.glance_approach=false
 sys.vendor.shutdown.waittime=500
 
 # Surfaceflinger
+ro.sf.lcd_density=400
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.has_HDR_display=true
 ro.surface_flinger.has_wide_color_display=true

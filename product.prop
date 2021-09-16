@@ -1,0 +1,17 @@
+#
+# product props for berlin
+#
+
+# Audio
+ro.vendor.audio.crystal_talk.supported=true
+ro.vendor.audio.game_mic.supported=true
+
+# LMK
+ro.lmk.file_low_percentage=20
+ro.lmk.kill_heaviest_task=true
+ro.lmk.pgscan_limit=3000
+ro.lmk.psi_partial_stall_ms=50
+ro.lmk.swap_free_low_percentage=10
+ro.lmk.swap_util_max=90
+ro.lmk.thrashing_limit=60
+ro.lmk.threshold_decay=50
