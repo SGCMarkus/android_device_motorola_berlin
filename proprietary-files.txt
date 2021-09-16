@@ -100,6 +100,9 @@ vendor/firmware/cs35l41-dsp1-spk-prot.bin
 vendor/firmware/cs35l41-dsp1-spk-prot.wmfw
 
 # Audio libraries
+vendor/etc/maxx_conf.ini
+vendor/etc/maxx_default.mps
+vendor/lib/libAndroidAlgSys.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
@@ -107,6 +110,7 @@ vendor/lib/libadiertac.so
 vendor/lib/libadm.so
 vendor/lib/libadsprpc.so
 vendor/lib/libaudcal.so
+vendor/lib/libc++_shared.so
 vendor/lib/libqtigef.so
 vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
@@ -148,6 +152,8 @@ vendor/lib/btaudio_offload_if.so
 vendor/lib/libbluetooth_audio_session_qti.so
 vendor/lib/vendor.qti.hardware.bluetooth_sar@1.0.so
 vendor/lib/vendor.qti.hardware.bluetooth_sar@1.1.so
+vendor/lib/vendor.qti.hardware.btconfigstore@1.0.so
+vendor/lib/vendor.qti.hardware.btconfigstore@2.0.so
 vendor/lib64/hw/audio.bluetooth_qti.default.so
 vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
 vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
@@ -157,6 +163,8 @@ vendor/lib64/btaudio_offload_if.so
 vendor/lib64/libbluetooth_audio_session_qti.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
+vendor/lib64/vendor.qti.hardware.btconfigstore@1.0.so
+vendor/lib64/vendor.qti.hardware.btconfigstore@2.0.so
 
 # Bluetooth (aptX) - from crosshatch - RQ1A.201205.003
 system_ext/lib64/libaptX_encoder.so|df1c89d7af1bb35808d5fe3496b04ba066c10cbc
@@ -193,6 +201,8 @@ vendor/lib/libcamxtintlessalgo.so
 vendor/lib/libc2d_helper.so
 vendor/lib/libchilog.so
 vendor/lib/libcom.qti.chinodeutils.so
+vendor/lib/libipebpsstriping170.so
+vendor/lib/libipebpsstriping.so
 vendor/lib/libmmcamera_bestats.so
 vendor/lib/libmmcamera_cac3.so
 vendor/lib/libmmcamera_faceproc.so
@@ -211,6 +221,7 @@ vendor/lib/libofflinelog.so
 vendor/lib/libopencv.so
 vendor/lib/libos.so
 vendor/lib/libpowercore.so
+vendor/lib/libswregistrationalgo.so
 vendor/lib/libsynx.so
 vendor/lib/libthreadutils.so
 vendor/lib/libvideooptfeature.so
@@ -261,6 +272,8 @@ vendor/lib64/libcamxtintlessalgo.so
 vendor/lib64/libc2d_helper.so
 vendor/lib64/libchilog.so
 vendor/lib64/libcom.qti.chinodeutils.so
+vendor/lib64/libipebpsstriping170.so
+vendor/lib64/libipebpsstriping.so
 vendor/lib64/libmmcamera_bestats.so
 vendor/lib64/libmmcamera_cac3.so
 vendor/lib64/libmmcamera_faceproc.so
@@ -280,6 +293,7 @@ vendor/lib64/liboffloadhal.so
 vendor/lib64/libopencv.so
 vendor/lib64/libos.so
 vendor/lib64/libpowercore.so
+vendor/lib64/libswregistrationalgo.so
 vendor/lib64/libsynx.so
 vendor/lib64/libthreadutils.so
 vendor/lib64/libtriplecam_optical_zoom_control.so
@@ -685,22 +699,25 @@ system_ext/lib/vendor.qti.diaghal@1.0.so
 system_ext/lib64/vendor.qti.diaghal@1.0.so
 vendor/bin/diag-router
 vendor/etc/init/vendor.qti.diag.rc
+-vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml
 vendor/lib/vendor.qti.diaghal@1.0.so
 vendor/lib64/vendor.qti.diaghal@1.0.so
 
 # Display
-vendor/bin/hw/com.motorola.hardware.display.panel@1.1-service
-vendor/bin/hw/com.motorola.hardware.display.touch@1.1-service
-vendor/etc/init/com.motorola.hardware.display.panel@1.1-service.rc
-vendor/etc/init/com.motorola.hardware.display.touch@1.1-service.rc
-vendor/lib/com.motorola.hardware.display.panel@1.0.so
-vendor/lib/com.motorola.hardware.display.panel@1.1.so
-vendor/lib/hw/com.motorola.hardware.display.panel@1.1-impl.so
-vendor/lib64/com.motorola.hardware.display.panel@1.0.so
-vendor/lib64/com.motorola.hardware.display.panel@1.1.so
-vendor/lib64/com.motorola.hardware.display.touch@1.0.so
-vendor/lib64/com.motorola.hardware.display.touch@1.1.so
-vendor/lib64/hw/com.motorola.hardware.display.panel@1.1-impl.so
+#vendor/bin/hw/com.motorola.hardware.display.panel@1.1-service
+#vendor/bin/hw/com.motorola.hardware.display.touch@1.1-service
+#vendor/etc/init/com.motorola.hardware.display.panel@1.1-service.rc
+#vendor/etc/init/com.motorola.hardware.display.touch@1.1-service.rc
+#vendor/lib/com.motorola.hardware.display.panel@1.0.so
+#vendor/lib/com.motorola.hardware.display.panel@1.1.so
+#vendor/lib/hw/com.motorola.hardware.display.panel@1.1-impl.so
+#vendor/lib/hw/displaypanel.default.so
+#vendor/lib64/com.motorola.hardware.display.panel@1.0.so
+#vendor/lib64/com.motorola.hardware.display.panel@1.1.so
+#vendor/lib64/com.motorola.hardware.display.touch@1.0.so
+#vendor/lib64/com.motorola.hardware.display.touch@1.1.so
+#vendor/lib64/hw/com.motorola.hardware.display.panel@1.1-impl.so
+#vendor/lib64/hw/displaypanel.default.so
 
 # Display - HDR
 vendor/etc/hdr_tm_config.xml
@@ -909,6 +926,7 @@ vendor/lib64/libasn1crt.so
 vendor/lib64/libasn1crtx.so
 vendor/lib64/libbatching.so
 vendor/lib64/libcacertclient.so
+vendor/lib64/libcdfw.so
 vendor/lib64/libcdfw_remote_api.so
 vendor/lib64/libdataitems.so
 vendor/lib64/libgdtap.so
@@ -1019,6 +1037,7 @@ vendor/bin/hw/vendor.qti.media.c2@1.0-service
 vendor/bin/init.qti.media.sh
 vendor/etc/init/init.qti.media.rc
 vendor/etc/init/vendor.qti.media.c2@1.0-service.rc
+-vendor/etc/vintf/manifest/c2_manifest_vendor.xml
 vendor/etc/media_yupik_v0/video_system_specs.json
 vendor/etc/media_yupik_v1/video_system_specs.json
 vendor/etc/media/video_system_specs.json
@@ -1051,6 +1070,7 @@ vendor/lib64/unnhal-acc-htp.so
 #system_ext/etc/permissions/com.st.android.nfc_extensions.xml
 #vendor/bin/hw/android.hardware.nfc@1.2-service.st
 #vendor/etc/init/android.hardware.nfc@1.2-service.st.rc
+vendor/bin/STFlashTool
 vendor/etc/init/hw/init.vendor.st21nfc.rc
 #vendor/lib/nfc_nci.st21nfc.st.so
 #vendor/lib64/nfc_nci.st21nfc.st.so
@@ -1059,7 +1079,7 @@ vendor/etc/init/hw/init.vendor.st21nfc.rc
 vendor/etc/libnfc-hal-st.conf
 vendor/etc/libnfc-mtp-SN100.conf
 vendor/etc/libnfc-mtp-SN100_38_4MHZ.conf
-vendor/etc/libnfc-nci-st.conf
+vendor/etc/libnfc-nci-st.conf:vendor/etc/libnfc-nci.conf
 vendor/etc/libnfc-qrd-SN100.conf
 vendor/etc/libnfc-qrd-SN100_38_4MHZ.conf
 vendor/etc/st21nfc_conf_ds.txt
@@ -1264,9 +1284,11 @@ vendor/bin/hw/qcrilNrd
 vendor/bin/adpl
 vendor/bin/ATFWD-daemon
 vendor/bin/ks
+vendor/bin/mbm_spy
 vendor/bin/netmgrd
 vendor/bin/pd-mapper
 vendor/bin/port-bridge
+vendor/bin/qmi_motext_hook
 vendor/bin/qrtr-cfg
 vendor/bin/qrtr-lookup
 vendor/bin/qrtr-ns
@@ -1376,6 +1398,19 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.1.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.2.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so
+
+# Telephony (qti-telephony-common) - from repo8 - cmi-qssi-user-11-RKQ1.200710.002-V12.1.2.0.RJACNXM-release-keys
+#product/framework/qti-telephony-common.jar:system_ext/framework/qti-telephony-common.jar|78f600ef38a46e592684ba30c615b1aea7dcc9a4
+
+etc/permissions/moto-ims-ext.xml
+etc/permissions/moto-settings.xml
+etc/permissions/moto-telephony.xml
+framework/moto-ims-ext.jar
+framework/moto-settings.jar
+framework/moto-telephony.jar
+system_ext/framework/qcom-moto-ims-ext.jar
+#system_ext/framework/qcom-moto-telephony-ext.jar
+system_ext/framework/qti-telephony-common.jar
 
 # RIL - IMS
 -system_ext/priv-app/ims/ims.apk
