@@ -210,6 +210,13 @@ on property:vendor.vold.post_fs_data_done=1 && property:ro.debuggable=1
 on property:vendor.vold.post_fs_data_done=1 && property:persist.wlan.debug_log=1
    start vendor.wlan_logging
 
+on property:ro.boot.carrier=*
+    setprop ro.carrier ${ro.boot.carrier}
+    setprop ro.vendor.carrier ${ro.boot.carrier}
+
+on property:ro.boot.radio=*
+    setprop ro.vendor.hw.radio ${ro.boot.radio}
+
 service vendor.wlan_logging /system/vendor/bin/cnss_diag -q -f -t HELIUM
    class main
    user system
